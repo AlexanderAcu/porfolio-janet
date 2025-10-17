@@ -1,0 +1,74 @@
+{
+  "name": "portfolio-janet",
+  "version": "1.0.0",
+  "description": "Portafolio profesional para economista y analista de datos",
+  "author": "Janet",
+  "license": "MIT",
+  "homepage": "https://janet-portfolio.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/janet/portfolio.git"
+  },
+  "keywords": [
+    "portfolio",
+    "economist",
+    "data-analyst",
+    "responsive",
+    "professional"
+  ],
+  "config": {
+    "colors": {
+      "primary": "#2563eb",
+      "secondary": "#f59e0b",
+      "accent": "#10b981",
+      "dark": "#1f2937",
+      "light": "#f3f4f6"
+    },
+    "fonts": {
+      "primary": "Inter, sans-serif"
+    },
+    "breakpoints": {
+      "mobile": "480px",
+      "tablet": "768px",
+      "desktop": "1024px",
+      "large": "1200px"
+    }
+  },
+  "features": {
+    "responsive": true,
+    "animations": true,
+    "contact_form": true,
+    "portfolio_filter": true,
+    "skill_bars": true,
+    "smooth_scroll": true,
+    "back_to_top": true,
+    "mobile_menu": true
+  },
+  "browser_support": {
+    "chrome": ">=60",
+    "firefox": ">=55",
+    "safari": ">=12",
+    "edge": ">=16"
+  },
+  "seo": {
+    "title": "Janet | Economista & Analista de Datos",
+    "description": "Portafolio profesional de Janet - Economista y Analista de Datos especializada en investigación económica y análisis estadístico avanzado.",
+    "keywords": "economista, analista de datos, data science, econometría, visualización de datos, python, r, tableau"
+  },
+  "social_media": {
+    "linkedin": "https://linkedin.com/in/janet",
+    "github": "https://github.com/janet",
+    "email": "janet.economista@email.com",
+    "twitter": "https://twitter.com/janet"
+  },
+  "analytics": {
+    "google_analytics": "GA_MEASUREMENT_ID",
+    "track_events": true
+  },
+  "performance": {
+    "image_optimization": true,
+    "lazy_loading": true,
+    "minification": false,
+    "compression": false
+  }
+}
