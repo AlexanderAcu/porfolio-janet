@@ -1,50 +1,80 @@
-// ===== GLOBAL VARIABLES =====
+// VARIABLES GLOBALES 
 let navbar = document.getElementById('navbar');
 let navMenu = document.getElementById('nav-menu');
 let hamburger = document.getElementById('hamburger');
 let backToTopBtn = document.getElementById('back-to-top');
 let contactForm = document.getElementById('contact-form');
+let themeToggle = document.getElementById('theme-toggle');
+let themeIcon = document.getElementById('theme-icon');
 
-// ===== WINDOW LOAD EVENT =====
+// FUNCIONALIDAD DE TEMA
+// Inicializar tema
+function initTheme() {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    updateThemeIcon(savedTheme);
+}
+
+// Alternar tema
+function toggleTheme() {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    updateThemeIcon(newTheme);
+}
+
+// Actualizar icono de tema
+function updateThemeIcon(theme) {
+    themeIcon.className = theme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
+}
+
+// Event listener para alternar tema
+themeToggle.addEventListener('click', toggleTheme);
+
+// ===== EVENTO DE CARGA DE VENTANA =====
 window.addEventListener('load', function() {
-    // Initialize animations
+    // Inicializar tema
+    initTheme();
+    // Inicializar animaciones
     initAnimations();
-    // Initialize skill tags
+    // Inicializar etiquetas de habilidades
     initSkillTags();
-    // Preload images
+    // Precargar imágenes
     preloadImages();
 });
 
-// ===== SCROLL EVENTS =====
+// ===== EVENTOS DE SCROLL =====
 window.addEventListener('scroll', function() {
-    // Navbar scroll effect
+    // Efecto de scroll en navbar
     if (window.scrollY > 50) {
         navbar.classList.add('scrolled');
     } else {
         navbar.classList.remove('scrolled');
     }
     
-    // Back to top button
+    // Botón volver arriba
     if (window.scrollY > 300) {
         backToTopBtn.classList.add('visible');
     } else {
         backToTopBtn.classList.remove('visible');
     }
     
-    // Active navigation link highlighting
+    // Resaltado de enlace de navegación activo
     updateActiveNavLink();
     
-    // Trigger animations on scroll
+    // Activar animaciones en scroll
     triggerScrollAnimations();
 });
 
-// ===== NAVIGATION FUNCTIONALITY =====
-// Mobile menu toggle
+// FUNCIONALIDAD DE NAVEGACIÓN 
+// Alternar menú móvil
 hamburger.addEventListener('click', function() {
     navMenu.classList.toggle('active');
     hamburger.classList.toggle('active');
     
-    // Animate hamburger bars
+    // Animar barras del hamburger
     let bars = hamburger.querySelectorAll('.bar');
     bars.forEach((bar, index) => {
         if (hamburger.classList.contains('active')) {
@@ -58,13 +88,13 @@ hamburger.addEventListener('click', function() {
     });
 });
 
-// Close mobile menu when clicking on a link
+// Cerrar menú móvil al hacer clic en un enlace
 navMenu.addEventListener('click', function(e) {
     if (e.target.classList.contains('nav-link')) {
         navMenu.classList.remove('active');
         hamburger.classList.remove('active');
         
-        // Reset hamburger bars
+        // Restablecer barras del hamburger
         let bars = hamburger.querySelectorAll('.bar');
         bars.forEach(bar => {
             bar.style.transform = 'none';
@@ -73,13 +103,13 @@ navMenu.addEventListener('click', function(e) {
     }
 });
 
-// Smooth scroll for navigation links
+// Scroll suave para enlaces de navegación
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
-            const offsetTop = target.offsetTop - 70; // Account for fixed navbar
+            const offsetTop = target.offsetTop - 70; 
             window.scrollTo({
                 top: offsetTop,
                 behavior: 'smooth'
@@ -88,7 +118,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Update active navigation link based on scroll position
+// Actualizar enlace de navegación activo basado en posición de scroll
 function updateActiveNavLink() {
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.nav-link');
@@ -110,7 +140,7 @@ function updateActiveNavLink() {
     });
 }
 
-// ===== BACK TO TOP FUNCTIONALITY =====
+//  FUNCIONALIDAD VOLVER ARRIBA 
 backToTopBtn.addEventListener('click', function() {
     window.scrollTo({
         top: 0,
@@ -118,16 +148,16 @@ backToTopBtn.addEventListener('click', function() {
     });
 });
 
-// ===== PORTFOLIO FILTER FUNCTIONALITY =====
+// FUNCIONALIDAD FILTRO DE PORTAFOLIO 
 document.addEventListener('DOMContentLoaded', function() {
     const filterBtns = document.querySelectorAll('.filter-btn');
     const portfolioItems = document.querySelectorAll('.portfolio-item');
     
     filterBtns.forEach(btn => {
         btn.addEventListener('click', function() {
-            // Remove active class from all buttons
+            // Remover clase activa de todos los botones
             filterBtns.forEach(b => b.classList.remove('active'));
-            // Add active class to clicked button
+            // Agregar clase activa al botón clickeado
             this.classList.add('active');
             
             const filter = this.getAttribute('data-filter');
@@ -146,7 +176,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// ===== SKILL TAGS ANIMATION =====
+// ANIMACIÓN DE ETIQUETAS DE HABILIDADES 
 function initSkillTags() {
     const skillTags = document.querySelectorAll('.skill-tag');
     
@@ -175,29 +205,29 @@ function initSkillTags() {
     });
 }
 
-// ===== CONTACT FORM FUNCTIONALITY =====
+// FUNCIONALIDAD FORMULARIO DE CONTACTO (No Disponible)
 contactForm.addEventListener('submit', function(e) {
     e.preventDefault();
     
-    // Get form data
+    // Obtener datos del formulario
     const formData = new FormData(this);
     const name = formData.get('name');
     const email = formData.get('email');
     const subject = formData.get('subject');
     const message = formData.get('message');
     
-    // Basic validation
+    // Validación básica
     if (!validateForm(name, email, subject, message)) {
         return;
     }
     
-    // Show loading state
+    // Mostrar estado de carga
     const submitBtn = this.querySelector('button[type="submit"]');
     const originalText = submitBtn.innerHTML;
     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
     submitBtn.disabled = true;
     
-    // Simulate form submission (replace with actual form handling)
+    // Simular envío de formulario (reemplazar con manejo real del formulario)
     setTimeout(() => {
         showNotification('¡Mensaje enviado con éxito! Te contactaré pronto.', 'success');
         this.reset();
@@ -206,7 +236,7 @@ contactForm.addEventListener('submit', function(e) {
     }, 2000);
 });
 
-// Form validation
+// Validación de formulario
 function validateForm(name, email, subject, message) {
     const errors = [];
     
@@ -234,21 +264,21 @@ function validateForm(name, email, subject, message) {
     return true;
 }
 
-// Email validation
+// Validación de email
 function isValidEmail(email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
 }
 
-// Notification system
+// Sistema de notificaciones
 function showNotification(message, type = 'info') {
-    // Remove existing notifications
+    // Remover notificaciones existentes
     const existingNotification = document.querySelector('.notification');
     if (existingNotification) {
         existingNotification.remove();
     }
     
-    // Create notification element
+    // Crear elemento de notificación
     const notification = document.createElement('div');
     notification.className = `notification notification-${type}`;
     notification.innerHTML = `
@@ -261,7 +291,7 @@ function showNotification(message, type = 'info') {
         </div>
     `;
     
-    // Add styles
+    // Agregar estilos
     Object.assign(notification.style, {
         position: 'fixed',
         top: '20px',
@@ -276,17 +306,17 @@ function showNotification(message, type = 'info') {
         animation: 'slideInRight 0.3s ease-out'
     });
     
-    // Add to body
+    // Agregar al body
     document.body.appendChild(notification);
     
-    // Close button functionality
+    // Funcionalidad del botón cerrar
     const closeBtn = notification.querySelector('.notification-close');
     closeBtn.addEventListener('click', () => {
         notification.style.animation = 'slideOutRight 0.3s ease-out';
         setTimeout(() => notification.remove(), 300);
     });
     
-    // Auto remove after 5 seconds
+    // Auto remover después de 5 segundos
     setTimeout(() => {
         if (notification.parentNode) {
             notification.style.animation = 'slideOutRight 0.3s ease-out';
@@ -313,7 +343,7 @@ function getNotificationColor(type) {
     }
 }
 
-// Add notification animations to CSS
+// Agregar animaciones de notificación al CSS
 const notificationStyles = `
     @keyframes slideInRight {
         from {
@@ -360,12 +390,12 @@ const notificationStyles = `
     }
 `;
 
-// Add styles to head
+// Agregar estilos al head
 const styleSheet = document.createElement('style');
 styleSheet.textContent = notificationStyles;
 document.head.appendChild(styleSheet);
 
-// ===== SCROLL ANIMATIONS =====
+// ===== ANIMACIONES DE SCROLL =====
 function initAnimations() {
     const observerOptions = {
         threshold: 0.1,
@@ -381,7 +411,7 @@ function initAnimations() {
         });
     }, observerOptions);
     
-    // Observe elements for animation
+    // Observar elementos para animación
     const animatedElements = document.querySelectorAll('.service-card, .portfolio-item, .about-stats .stat-item');
     animatedElements.forEach(el => {
         observer.observe(el);
@@ -401,7 +431,7 @@ function triggerScrollAnimations() {
     });
 }
 
-// ===== TYPED TEXT EFFECT =====
+// EFECTOS DE TEXTO TYPED 
 function initTypedEffect() {
     const typedElement = document.querySelector('.hero-profession');
     if (!typedElement) return;
@@ -432,22 +462,22 @@ function initTypedEffect() {
         let typeSpeed = isDeleting ? 50 : 100;
         
         if (!isDeleting && charIndex === currentText.length) {
-            typeSpeed = 2000; // Pause at end
+            typeSpeed = 2000; 
             isDeleting = true;
         } else if (isDeleting && charIndex === 0) {
             isDeleting = false;
             textIndex = (textIndex + 1) % texts.length;
-            typeSpeed = 500; // Pause before typing new text
+            typeSpeed = 500; 
         }
         
         setTimeout(type, typeSpeed);
     }
     
-    // Start typing effect after page load
+    
     setTimeout(type, 1000);
 }
 
-// ===== PARALLAX EFFECT =====
+// PARALLAX EFFECT 
 function initParallax() {
     window.addEventListener('scroll', () => {
         const scrolled = window.pageYOffset;
@@ -460,7 +490,7 @@ function initParallax() {
     });
 }
 
-// ===== SMOOTH REVEAL ON SCROLL =====
+//SMOOTH REVEAL ON SCROLL 
 function initScrollReveal() {
     const reveals = document.querySelectorAll('.section-title, .section-subtitle, .about-intro, .contact-info');
     
@@ -484,7 +514,7 @@ function initScrollReveal() {
     });
 }
 
-// ===== PRELOAD IMAGES =====
+// PRECARGAR IMÁGENES 
 function preloadImages() {
     const imageUrls = [
         'images/profile.jpg',
@@ -500,7 +530,7 @@ function preloadImages() {
     });
 }
 
-// ===== LAZY LOADING =====
+// LAZY LOADING 
 function initLazyLoading() {
     const lazyImages = document.querySelectorAll('img[data-src]');
     
@@ -520,7 +550,7 @@ function initLazyLoading() {
     });
 }
 
-// ===== THEME TOGGLE (Optional) =====
+//  THEME TOGGLE (OPCIONAL)
 function initThemeToggle() {
     const themeToggle = document.getElementById('theme-toggle');
     if (!themeToggle) return;
@@ -537,8 +567,8 @@ function initThemeToggle() {
     });
 }
 
-// ===== PERFORMANCE OPTIMIZATION =====
-// Debounce function for scroll events
+// PERFORMANCE OPTIMIZATION 
+// EVENTOS DE SCROLL OPTIMIZADOS
 function debounce(func, wait) {
     let timeout;
     return function executedFunction(...args) {
@@ -561,7 +591,7 @@ const optimizedScrollHandler = debounce(() => {
 window.removeEventListener('scroll', triggerScrollAnimations);
 window.addEventListener('scroll', optimizedScrollHandler);
 
-// ===== INITIALIZATION =====
+// INICIALIZACIÓN 
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize all features
     initTypedEffect();
@@ -570,7 +600,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initLazyLoading();
     initThemeToggle();
     
-    // Add loading class removal
+    // Agregar remoción de clase de carga
     document.body.classList.add('loaded');
     
     console.log('Portfolio initialized successfully!');
@@ -606,7 +636,7 @@ document.addEventListener('keydown', function(e) {
     }
 });
 
-// ===== SOCIAL MEDIA SHARE (Optional) =====
+// SOCIAL MEDIA SHARE 
 function shareOnSocialMedia(platform, url = window.location.href, text = 'Check out this amazing portfolio!') {
     const shareUrls = {
         twitter: `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`,
@@ -619,7 +649,7 @@ function shareOnSocialMedia(platform, url = window.location.href, text = 'Check 
     }
 }
 
-// ===== ANALYTICS (Optional) =====
+// ANALYTICS 
 function trackEvent(category, action, label = '') {
     // Google Analytics event tracking
     if (typeof gtag !== 'undefined') {
@@ -647,7 +677,7 @@ document.addEventListener('click', function(e) {
     }
 });
 
-// ===== PRINT STYLES SUPPORT =====
+// PRINT STYLES SUPPORT 
 window.addEventListener('beforeprint', function() {
     document.body.classList.add('printing');
 });

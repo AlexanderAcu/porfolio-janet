@@ -6,20 +6,92 @@
     <title>Janet | Economista & Analista de Datos</title>
     <meta name="description" content="Portafolio profesional de Janet - Economista y Analista de Datos especializada en investigación económica y análisis estadístico avanzado.">
     
-    <!-- Fonts -->
+    <!-- Fuentes -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Icons -->
+    <!-- Iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- CSS -->
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/loading.css">
     
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
 </head>
 <body>
-    <!-- Navigation -->
+    <!-- Pantalla de Carga -->
+    <div class="loading-screen" id="loading-screen">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <h1>Janet</h1>
+                <p>Economista & Analista de Datos</p>
+            </div>
+            
+            <div class="loading-charts">
+                <!-- Gráficos de Barras Animados -->
+                <div class="chart-container">
+                    <div class="chart-bar" data-percentage="85">
+                        <div class="bar-fill"></div>
+                        <span class="bar-label">Análisis Estadístico</span>
+                        <span class="bar-percentage">85%</span>
+                    </div>
+                    <div class="chart-bar" data-percentage="92">
+                        <div class="bar-fill"></div>
+                        <span class="bar-label">Visualización de Datos</span>
+                        <span class="bar-percentage">92%</span>
+                    </div>
+                    <div class="chart-bar" data-percentage="78">
+                        <div class="bar-fill"></div>
+                        <span class="bar-label">Modelado Econométrico</span>
+                        <span class="bar-percentage">78%</span>
+                    </div>
+                    <div class="chart-bar" data-percentage="95">
+                        <div class="bar-fill"></div>
+                        <span class="bar-label">Investigación</span>
+                        <span class="bar-percentage">95%</span>
+                    </div>
+                </div>
+                
+                <!-- Gráfico Circular Animado -->
+                <div class="pie-chart">
+                    <svg viewBox="0 0 42 42" class="donut">
+                        <defs>
+                            <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" style="stop-color:#ffffff"/>
+                                <stop offset="100%" style="stop-color:#f1f5f9"/>
+                            </linearGradient>
+                        </defs>
+                        <circle cx="21" cy="21" r="15.915" fill="transparent" stroke="rgba(255,255,255,0.2)" stroke-width="3"></circle>
+                        <circle cx="21" cy="21" r="15.915" fill="transparent" stroke="url(#gradient)" stroke-width="3" 
+                                stroke-dasharray="75 25" stroke-dashoffset="25" class="donut-segment"></circle>
+                    </svg>
+                    <div class="pie-chart-center">
+                        <span class="pie-percentage">75%</span>
+                        <span class="pie-label">Precisión</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="loading-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+                <div class="loading-text">Cargando portafolio...</div>
+                <div class="loading-percentage">0%</div>
+            </div>
+            
+            <div class="data-points">
+                <div class="data-point" style="--delay: 0s">📊</div>
+                <div class="data-point" style="--delay: 0.2s">📈</div>
+                <div class="data-point" style="--delay: 0.4s">💹</div>
+                <div class="data-point" style="--delay: 0.6s">🔍</div>
+                <div class="data-point" style="--delay: 0.8s">📋</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navegación -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <div class="nav-logo">
@@ -45,15 +117,20 @@
                     <a href="#contact" class="nav-link">Contacto</a>
                 </li>
             </ul>
-            <div class="hamburger" id="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
+            <div class="nav-controls">
+                <button class="theme-toggle" id="theme-toggle">
+                    <i class="fas fa-sun" id="theme-icon"></i>
+                </button>
+                <div class="hamburger" id="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- Sección Hero -->
     <section id="home" class="hero">
         <div class="hero-container">
             <div class="hero-content">
@@ -98,7 +175,7 @@
         </div>
     </section>
 
-    <!-- About Section -->
+    <!-- Sección Acerca de -->
     <section id="about" class="about">
         <div class="container">
             <div class="section-header">
@@ -120,7 +197,7 @@
                     </div>
                     <div class="about-stats">
                         <div class="stat-item">
-                            <div class="stat-number">50+</div>
+                            <div class="stat-number">1+</div>
                             <div class="stat-label">Proyectos Completados</div>
                         </div>
                         <div class="stat-item">
@@ -128,7 +205,7 @@
                             <div class="stat-label">Años de Experiencia</div>
                         </div>
                         <div class="stat-item">
-                            <div class="stat-number">15+</div>
+                            <div class="stat-number">1+</div>
                             <div class="stat-label">Clientes Satisfechos</div>
                         </div>
                     </div>
@@ -137,12 +214,12 @@
                     <div class="education">
                         <h4><i class="fas fa-graduation-cap"></i> Educación</h4>
                         <div class="education-item">
-                            <div class="education-degree">Maestría en Economía Aplicada</div>
+                            <div class="education-degree">Maestría en Economía de la casa </div>
                             <div class="education-school">Universidad Nacional</div>
                             <div class="education-year">2018 - 2020</div>
                         </div>
                         <div class="education-item">
-                            <div class="education-degree">Licenciatura en Economía</div>
+                            <div class="education-degree">Licenciatura en Joder avanzada </div>
                             <div class="education-school">Universidad Central</div>
                             <div class="education-year">2014 - 2018</div>
                         </div>
@@ -150,10 +227,10 @@
                     <div class="certifications">
                         <h4><i class="fas fa-certificate"></i> Certificaciones</h4>
                         <ul class="cert-list">
-                            <li>Data Science Specialization - Coursera</li>
-                            <li>Advanced Analytics - Google Analytics</li>
-                            <li>Python for Data Science - DataCamp</li>
-                            <li>Financial Analysis - CFA Institute</li>
+                            <li>especialista en casi todo </li>
+                            <li>avanzada en analisis de joder </li>
+                            <li>Python que no sabe nada </li>
+                            <li>sabe hacer de todo jaja</li>
                         </ul>
                     </div>
                 </div>
@@ -161,7 +238,7 @@
         </div>
     </section>
 
-    <!-- Services Section -->
+    <!-- Sección Servicios -->
     <section id="services" class="services">
         <div class="container">
             <div class="section-header">
@@ -233,7 +310,7 @@
         </div>
     </section>
 
-    <!-- Portfolio Section -->
+    <!-- Sección Portafolio -->
     <section id="portfolio" class="portfolio">
         <div class="container">
             <div class="section-header">
@@ -339,7 +416,7 @@
         </div>
     </section>
 
-    <!-- Skills Section -->
+    <!-- Sección Habilidades -->
     <section id="skills" class="skills">
         <div class="container">
             <div class="section-header">
@@ -417,7 +494,7 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
+    <!-- Sección Contacto -->
     <section id="contact" class="contact">
         <div class="container">
             <div class="section-header">
@@ -426,31 +503,33 @@
             </div>
             <div class="contact-content">
                 <div class="contact-info">
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-envelope"></i>
+                    <div class="contact-items">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Email</h4>
+                                <p>janet.economista@email.com</p>
+                            </div>
                         </div>
-                        <div class="contact-details">
-                            <h4>Email</h4>
-                            <p>janet.economista@email.com</p>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Teléfono</h4>
+                                <p>3547-</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-phone"></i>
-                        </div>
-                        <div class="contact-details">
-                            <h4>Teléfono</h4>
-                            <p>+1 (555) 123-4567</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-map-marker-alt"></i>
-                        </div>
-                        <div class="contact-details">
-                            <h4>Ubicación</h4>
-                            <p>Ciudad, País</p>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Ubicación</h4>
+                                <p>Despeñaderos, Córdoba, Argentina</p>
+                            </div>
                         </div>
                     </div>
                     <div class="contact-social">
@@ -462,39 +541,14 @@
                             <a href="https://github.com/janet" target="_blank" class="social-link">
                                 <i class="fab fa-github"></i>
                             </a>
-                            <a href="https://twitter.com/janet" target="_blank" class="social-link">
-                                <i class="fab fa-twitter"></i>
-                            </a>
                         </div>
                     </div>
                 </div>
-                <form class="contact-form" id="contact-form">
-                    <div class="form-group">
-                        <label for="name">Nombre Completo</label>
-                        <input type="text" id="name" name="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="subject">Asunto</label>
-                        <input type="text" id="subject" name="subject" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Mensaje</label>
-                        <textarea id="message" name="message" rows="6" required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-paper-plane"></i>
-                        Enviar Mensaje
-                    </button>
-                </form>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- Pie de Página -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
@@ -510,12 +564,13 @@
         </div>
     </footer>
 
-    <!-- Back to Top Button -->
+    <!-- Botón Volver Arriba -->
     <button id="back-to-top" class="back-to-top">
         <i class="fas fa-chevron-up"></i>
     </button>
 
     <!-- JavaScript -->
+    <script src="js/loading.js"></script>
     <script src="js/script.js"></script>
 </body>
 </html>

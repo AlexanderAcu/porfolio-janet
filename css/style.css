@@ -1,4 +1,4 @@
-/* ===== RESET & BASE STYLES ===== */
+/* ===== RESET Y ESTILOS BASE ===== */
 * {
     margin: 0;
     padding: 0;
@@ -12,14 +12,15 @@ html {
 body {
     font-family: 'Inter', sans-serif;
     line-height: 1.6;
-    color: #333;
-    background-color: #fff;
+    color: var(--text-color);
+    background-color: var(--background-color);
     overflow-x: hidden;
+    transition: var(--transition);
 }
 
-/* ===== CSS VARIABLES ===== */
+/* ===== VARIABLES CSS ===== */
 :root {
-    /* Colors */
+    /* Colores - Modo Claro */
     --primary-color: #2563eb;
     --primary-dark: #1d4ed8;
     --primary-light: #3b82f6;
@@ -29,10 +30,14 @@ body {
     --gray-color: #6b7280;
     --light-gray: #f3f4f6;
     --white: #ffffff;
+    --background-color: #ffffff;
+    --text-color: #1f2937;
+    --text-light: #6b7280;
+    --border-color: #e5e7eb;
     --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     --gradient-text: linear-gradient(135deg, #2563eb, #7c3aed);
     
-    /* Typography */
+    /* Tipografía */
     --font-size-xs: 0.75rem;
     --font-size-sm: 0.875rem;
     --font-size-base: 1rem;
@@ -43,7 +48,7 @@ body {
     --font-size-4xl: 2.25rem;
     --font-size-5xl: 3rem;
     
-    /* Spacing */
+    /* Espaciado */
     --spacing-1: 0.25rem;
     --spacing-2: 0.5rem;
     --spacing-3: 0.75rem;
@@ -56,19 +61,45 @@ body {
     --spacing-16: 4rem;
     --spacing-20: 5rem;
     
-    /* Shadows */
+    /* Sombras */
     --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
     --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
     --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
     --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
     --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
     
-    /* Transitions */
+    /* Transiciones */
     --transition: all 0.3s ease;
     --transition-fast: all 0.2s ease;
 }
 
-/* ===== UTILITY CLASSES ===== */
+/* Variables de Modo Oscuro */
+[data-theme="dark"] {
+    --background-color: #0f172a;
+    --text-color: #f1f5f9;
+    --text-light: #94a3b8;
+    --dark-color: #f1f5f9;
+    --gray-color: #94a3b8;
+    --light-gray: #1e293b;
+    --white: #0f172a;
+    --border-color: #334155;
+    --gradient: linear-gradient(135deg, #1e40af 0%, #7c3aed 100%);
+}
+
+/* Fondos de secciones en modo oscuro */
+[data-theme="dark"] .hero {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+}
+
+[data-theme="dark"] .about,
+[data-theme="dark"] .services,
+[data-theme="dark"] .portfolio,
+[data-theme="dark"] .skills,
+[data-theme="dark"] .contact {
+    background-color: var(--background-color);
+}
+
+/* ===== CLASES UTILITARIAS ===== */
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -146,7 +177,7 @@ body {
     margin: 0 auto;
 }
 
-/* ===== NAVIGATION ===== */
+/* ===== NAVEGACIÓN ===== */
 .navbar {
     position: fixed;
     top: 0;
@@ -154,13 +185,17 @@ body {
     right: 0;
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid var(--border-color);
     z-index: 1000;
     transition: var(--transition);
 }
 
+[data-theme="dark"] .navbar {
+    background: rgba(15, 23, 42, 0.95);
+}
+
 .navbar.scrolled {
-    background: rgba(255, 255, 255, 0.98);
+    background: var(--background-color);
     box-shadow: var(--shadow-md);
 }
 
@@ -227,14 +262,45 @@ body {
     gap: 4px;
 }
 
+.nav-controls {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-4);
+}
+
+.theme-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 50%;
+    background: var(--light-gray);
+    color: var(--text-color);
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: var(--font-size-lg);
+}
+
+.theme-toggle:hover {
+    background: var(--primary-color);
+    color: var(--white);
+    transform: scale(1.1);
+}
+
+[data-theme="dark"] .theme-toggle {
+    background: var(--border-color);
+}
+
 .bar {
     width: 25px;
     height: 3px;
-    background-color: var(--dark-color);
+    background-color: var(--text-color);
     transition: var(--transition);
 }
 
-/* ===== HERO SECTION ===== */
+/* ===== SECCIÓN HERO ===== */
 .hero {
     min-height: 100vh;
     display: flex;
@@ -400,7 +466,7 @@ body {
     }
 }
 
-/* ===== ABOUT SECTION ===== */
+/* ===== SECCIÓN ACERCA DE ===== */
 .about {
     padding: var(--spacing-20) 0;
     background: var(--white);
@@ -522,7 +588,7 @@ body {
     font-weight: bold;
 }
 
-/* ===== SERVICES SECTION ===== */
+/* ===== SECCIÓN SERVICIOS ===== */
 .services {
     padding: var(--spacing-20) 0;
     background: var(--light-gray);
@@ -607,7 +673,7 @@ body {
     font-weight: bold;
 }
 
-/* ===== PORTFOLIO SECTION ===== */
+/* ===== SECCIÓN PORTAFOLIO ===== */
 .portfolio {
     padding: var(--spacing-20) 0;
     background: var(--white);
@@ -753,7 +819,7 @@ body {
     font-weight: 500;
 }
 
-/* ===== SKILLS SECTION ===== */
+/* ===== SECCIÓN HABILIDADES ===== */
 .skills {
     padding: var(--spacing-20) 0;
     background: var(--light-gray);
@@ -878,23 +944,35 @@ body {
     text-align: center;
 }
 
-/* ===== CONTACT SECTION ===== */
+/* ===== SECCIÓN CONTACTO ===== */
 .contact {
     padding: var(--spacing-20) 0;
     background: var(--white);
 }
 
 .contact-content {
+    display: flex;
+    justify-content: center;
+}
+
+.contact-info {
+    max-width: 900px;
+    width: 100%;
+}
+
+.contact-items {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--spacing-12);
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-8);
+    margin-bottom: var(--spacing-10);
 }
 
 .contact-item {
     display: flex;
+    flex-direction: column;
     align-items: center;
+    text-align: center;
     gap: var(--spacing-4);
-    margin-bottom: var(--spacing-6);
 }
 
 .contact-icon {
@@ -925,7 +1003,7 @@ body {
 }
 
 .contact-social {
-    margin-top: var(--spacing-8);
+    text-align: center;
 }
 
 .contact-social h4 {
@@ -938,54 +1016,21 @@ body {
 .social-links {
     display: flex;
     gap: var(--spacing-3);
+    justify-content: center;
 }
 
-.contact-form {
-    background: var(--light-gray);
-    padding: var(--spacing-8);
-    border-radius: 1rem;
-}
-
-.form-group {
-    margin-bottom: var(--spacing-6);
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: var(--spacing-2);
-    color: var(--dark-color);
-    font-weight: 500;
-}
-
-.form-group input,
-.form-group textarea {
-    width: 100%;
-    padding: var(--spacing-3);
-    border: 2px solid transparent;
-    background: var(--white);
-    border-radius: 0.5rem;
-    font-family: inherit;
-    transition: var(--transition);
-}
-
-.form-group input:focus,
-.form-group textarea:focus {
-    outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-}
-
-.form-group textarea {
-    resize: vertical;
-    min-height: 120px;
-}
-
-/* ===== FOOTER ===== */
+/* ===== PIE DE PÁGINA ===== */
 .footer {
     background: var(--dark-color);
     color: var(--white);
     padding: var(--spacing-8) 0;
     text-align: center;
+}
+
+/* Estilos del footer para modo oscuro */
+[data-theme="dark"] .footer {
+    background: #1e293b;
+    color: var(--text-color);
 }
 
 .footer-content {
@@ -1001,6 +1046,10 @@ body {
     color: rgba(255, 255, 255, 0.8);
 }
 
+[data-theme="dark"] .footer-text p {
+    color: var(--text-light);
+}
+
 .footer-links {
     display: flex;
     gap: var(--spacing-6);
@@ -1012,11 +1061,19 @@ body {
     transition: var(--transition);
 }
 
+[data-theme="dark"] .footer-links a {
+    color: var(--text-light);
+}
+
 .footer-links a:hover {
     color: var(--white);
 }
 
-/* ===== BACK TO TOP BUTTON ===== */
+[data-theme="dark"] .footer-links a:hover {
+    color: var(--text-color);
+}
+
+/* ===== BOTÓN VOLVER ARRIBA ===== */
 .back-to-top {
     position: fixed;
     bottom: 30px;
@@ -1044,7 +1101,7 @@ body {
     transform: translateY(-3px);
 }
 
-/* ===== RESPONSIVE DESIGN ===== */
+/* ===== DISEÑO RESPONSIVO ===== */
 @media (max-width: 768px) {
     :root {
         --font-size-5xl: 2.5rem;
@@ -1108,14 +1165,15 @@ body {
         grid-template-columns: 1fr;
     }
     
-    .contact-content {
-        grid-template-columns: 1fr;
-        gap: var(--spacing-8);
-    }
-    
     .footer-content {
         text-align: center;
         flex-direction: column;
+    }
+    
+    .contact-items {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-6);
+        margin-bottom: var(--spacing-8);
     }
     
     .portfolio-filters {
@@ -1165,7 +1223,7 @@ body {
     }
 }
 
-/* ===== ANIMATIONS ===== */
+/* ===== ANIMACIONES ===== */
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -1181,7 +1239,7 @@ body {
     animation: fadeInUp 0.6s ease-out;
 }
 
-/* ===== ACCESSIBILITY ===== */
+/* ===== ACCESIBILIDAD ===== */
 @media (prefers-reduced-motion: reduce) {
     * {
         animation-duration: 0.01ms !important;
@@ -1190,13 +1248,13 @@ body {
     }
 }
 
-/* Focus styles for accessibility */
+/* Estilos de enfoque para accesibilidad */
 *:focus {
     outline: 2px solid var(--primary-color);
     outline-offset: 2px;
 }
 
-/* High contrast mode support */
+/* Soporte para modo de alto contraste */
 @media (prefers-contrast: high) {
     :root {
         --primary-color: #0000ff;

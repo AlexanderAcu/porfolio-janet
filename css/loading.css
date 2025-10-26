@@ -1,0 +1,301 @@
+/* ===== ESTILOS DE PANTALLA DE CARGA ===== */
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.loading-screen.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+[data-theme="dark"] .loading-screen {
+    background: linear-gradient(135deg, #1e40af 0%, #7c3aed 100%);
+}
+
+.loading-content {
+    text-align: center;
+    color: white;
+    max-width: 600px;
+    width: 90%;
+}
+
+.loading-logo h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(45deg, #ffffff, #f1f5f9);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+.loading-logo p {
+    font-size: 1.125rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+@keyframes glow {
+    from { filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3)); }
+    to { filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.6)); }
+}
+
+/* Animaciones de Gráficos */
+.loading-charts {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    align-items: center;
+}
+
+.chart-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.chart-bar {
+    position: relative;
+    background: rgba(255, 255, 255, 0.1);
+    height: 40px;
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+}
+
+.bar-fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.6));
+    border-radius: 20px;
+    width: 0%;
+    animation: fillBar 3s ease-out forwards; /* Aumentado de 2s a 3s */
+    animation-delay: var(--delay, 0s);
+}
+
+.chart-bar:nth-child(1) { --delay: 0.8s; } /* Delays aumentados */
+.chart-bar:nth-child(2) { --delay: 1.2s; }
+.chart-bar:nth-child(3) { --delay: 1.6s; }
+.chart-bar:nth-child(4) { --delay: 2.0s; }
+
+.chart-bar:nth-child(1) .bar-fill { animation-name: fillBar85; }
+.chart-bar:nth-child(2) .bar-fill { animation-name: fillBar92; }
+.chart-bar:nth-child(3) .bar-fill { animation-name: fillBar78; }
+.chart-bar:nth-child(4) .bar-fill { animation-name: fillBar95; }
+
+@keyframes fillBar85 { to { width: 85%; } }
+@keyframes fillBar92 { to { width: 92%; } }
+@keyframes fillBar78 { to { width: 78%; } }
+@keyframes fillBar95 { to { width: 95%; } }
+
+.bar-label {
+    position: relative;
+    z-index: 2;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.bar-percentage {
+    position: relative;
+    z-index: 2;
+    margin-left: auto;
+    font-weight: 600;
+    opacity: 0;
+    animation: fadeInNumber 0.5s ease-out forwards;
+    animation-delay: calc(var(--delay, 0s) + 2.5s); /* Aumentado de 1.5s a 2.5s */
+}
+
+@keyframes fadeInNumber {
+    to { opacity: 1; }
+}
+
+/* Gráfico Circular */
+.pie-chart {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto;
+}
+
+.donut {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.donut-segment {
+    stroke-dasharray: 0 100;
+    animation: fillPie 3s ease-out forwards; /* Aumentado de 2s a 3s */
+    animation-delay: 2.5s; /* Aumentado de 1.8s a 2.5s */
+}
+
+@keyframes fillPie {
+    to { stroke-dasharray: 75 25; }
+}
+
+.pie-chart-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.pie-percentage {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 700;
+    opacity: 0;
+    animation: fadeInNumber 0.5s ease-out forwards;
+    animation-delay: 4.5s; /* Aumentado de 3s a 4.5s */
+}
+
+.pie-label {
+    display: block;
+    font-size: 0.75rem;
+    opacity: 0.8;
+    opacity: 0;
+    animation: fadeInNumber 0.5s ease-out forwards;
+    animation-delay: 4.8s; /* Aumentado de 3.2s a 4.8s */
+}
+
+/* Barra de Progreso */
+.loading-progress {
+    margin-bottom: 1.5rem;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 0.75rem;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #ffffff, #f1f5f9);
+    border-radius: 3px;
+    width: 0%;
+    animation: loadProgress 6s ease-out forwards; /* Aumentado de 4s a 6s */
+    animation-delay: 0.5s;
+}
+
+@keyframes loadProgress {
+    to { width: 100%; }
+}
+
+.loading-text {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    opacity: 0.9;
+}
+
+.loading-percentage {
+    font-weight: 600;
+    font-size: 1.125rem;
+}
+
+/* Animación de Puntos de Datos */
+.data-points {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.data-point {
+    font-size: 1.5rem;
+    opacity: 0;
+    animation: bounceIn 0.6s ease-out forwards;
+    animation-delay: var(--delay);
+}
+
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.3) translateY(20px);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.1) translateY(-10px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* Pantalla de Carga Responsiva */
+@media (max-width: 768px) {
+    .loading-charts {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .loading-logo h1 {
+        font-size: 2.25rem;
+    }
+    
+    .chart-bar {
+        height: 35px;
+    }
+    
+    .pie-chart {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .data-points {
+        gap: 0.75rem;
+    }
+    
+    .data-point {
+        font-size: 1.25rem;
+    }
+}
+
+/* Integración de variables de pantalla de carga */
+.loading-screen {
+    --primary-color: #2563eb;
+    --primary-dark: #1d4ed8;
+}
+
+/* Accesibilidad para pantalla de carga */
+@media (prefers-reduced-motion: reduce) {
+    .loading-screen * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .loading-screen .bar-fill,
+    .loading-screen .progress-fill {
+        animation: none !important;
+        width: 100% !important;
+    }
+    
+    .loading-screen .donut-segment {
+        animation: none !important;
+        stroke-dasharray: 75 25 !important;
+    }
+}
